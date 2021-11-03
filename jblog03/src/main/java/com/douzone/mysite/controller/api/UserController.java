@@ -20,11 +20,9 @@ public class UserController {
 	private UserService userService;
 
 	@ResponseBody
-	@RequestMapping("/checkemail")
-//	@GetMapping("/checkemail")
-	//public Map<String, Object> checkemail(
-	public JsonResult checkemail(@RequestParam(value = "email", required = true, defaultValue = "") String email) {
-		UserVo userVo = userService.getUser(email);
+	@RequestMapping("/checkid")
+	public JsonResult checkid(@RequestParam(value = "id", required = true, defaultValue = "") String id) {
+		UserVo userVo = userService.getUser(id);
 
 		///////////////////////////////////////////
 		// Map<String, Object> map = new HashMap<>();

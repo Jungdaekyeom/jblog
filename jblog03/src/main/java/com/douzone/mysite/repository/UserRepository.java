@@ -15,12 +15,12 @@ public class UserRepository {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public UserVo findByEmailAndPassword(String email, String password) throws UserRepositoryException {
+	public UserVo findByIdAndPassword(String id, String password) throws UserRepositoryException {
 		Map<String, String> map = new HashMap<>();
-		map.put("e", email);
-		map.put("p", password);
+		map.put("id", id);
+		map.put("password", password);
 
-		return sqlSession.selectOne("user.findByEmailAndPassword", map);
+		return sqlSession.selectOne("user.findByIdAndPassword", map);
 	}
 
 	public boolean insert(UserVo vo) {
@@ -32,8 +32,8 @@ public class UserRepository {
 		return sqlSession.selectOne("user.findByNo", no);
 	}
 
-	public UserVo findByEmail(String email) {
-		return sqlSession.selectOne("user.findByEmail", email);
+	public UserVo findById(String id) {
+		return sqlSession.selectOne("user.findById", id);
 	}
 
 	public boolean update(UserVo vo) {

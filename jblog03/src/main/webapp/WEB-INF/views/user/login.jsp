@@ -13,10 +13,14 @@
 <body>
 	<div class="center-content">
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
-
-		<form class="login-form">
+		<form class="login-form" name="loginform" method="post" action="${pageContext.request.contextPath }/user/auth">
       		<label>아이디</label> <input type="text" name="id">
       		<label>패스워드</label> <input type="text" name="password">
+      		<c:if test='${result == "fail" }'>
+				<p>
+					로그인이 실패 했습니다.
+				</p>
+			</c:if>
       		<input type="submit" value="로그인">
 		</form>
 	</div>

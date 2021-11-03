@@ -32,7 +32,6 @@ public class UserController {
 			model.addAllAttributes(result.getModel());
 			return "user/join";
 		}
-		
 		userService.join(vo);
 		return "redirect:/user/joinsuccess";
 	}
@@ -50,16 +49,15 @@ public class UserController {
 	@Auth
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String update(@AuthUser UserVo authUser, Model model) {
-		UserVo userVo = userService.getUser(authUser.getNo());
+		UserVo userVo = userService.getUser(authUser.getId());
 		model.addAttribute("userVo", userVo);
-		
 		return "user/update";
 	}	
 
 	@Auth
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(@AuthUser UserVo authUser, UserVo userVo) {
-		userVo.setNo(authUser.getNo());
+		userVo.setId(authUser.getId());
 
 		userService.updateUser(userVo);
 		authUser.setName(userVo.getName());
