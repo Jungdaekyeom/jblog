@@ -11,14 +11,9 @@
 </head>
 <body>
 	<div id="container">
-		<div id="header">
-			<h1>Spring 이야기</h1>
-			<ul>
-				<li><a href="">로그인</a></li>
-				<li><a href="">로그아웃</a></li>
-				<li><a href="">블로그 관리</a></li>
-			</ul>
-		</div>
+
+		<c:import url="/WEB-INF/views/includes/blog-admin-header.jsp" />
+
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
@@ -31,7 +26,7 @@
 					<p>
 				</div>
 				<ul class="blog-list">
-					<li><a href="">Spring Camp 2016 참여기</a> <span>2015/05/02</span>	</li>
+					<li><a href="">Spring Camp 2016 참여기...</a> <span>2015/05/02</span>	</li>
 					<li><a href="">Spring Boot 사용법 정리</a> <span>2015/05/02</span>	</li>
 					<li><a href="">Spring Security 설정법</a> <span>2015/05/02</span>	</li>
 					<li><a href="">JPA + Hinernate</a> <span>2015/05/02</span>	</li>
@@ -55,12 +50,7 @@
 				<li><a href="">기타</a></li>
 			</ul>
 		</div>
-		
-		<div id="footer">
-			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
-			</p>
-		</div>
+		<c:import url="/WEB-INF/views/includes/blog-admin-footer.jsp" />
 	</div>
 </body>
 </html>
