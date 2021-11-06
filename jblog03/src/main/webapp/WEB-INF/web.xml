@@ -32,10 +32,10 @@
 	</filter-mapping>
 
 	<!-- Dispatcher Servlet -->
+	<!-- DispatcherServlet에 대한 서블릿 매핑 추가(web.xml) -->
 	<servlet>
 		<servlet-name>spring</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet
-		</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>

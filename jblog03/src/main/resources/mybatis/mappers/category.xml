@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="category">	
-	<select id="insert" parameterType="categoryVo">
+
+	<select id="findAll" resultType="categoryvo">
 		<![CDATA[
-		insert into category values (null, #{name}, #{desc}, #{blog_id})
+		select no, name, description, blog_id from category
 		]]>
 	</select>
+	
+	<insert id="insert" parameterType="categoryvo">
+		<![CDATA[
+		insert into category values (null, #{name}, #{description}, #{blogId})
+		]]>
+	</insert>
+		
+	<insert id="delete" parameterType="long">
+		<![CDATA[
+		delete from category where no=#{no}
+		]]>
+	</insert>
+	
 </mapper>

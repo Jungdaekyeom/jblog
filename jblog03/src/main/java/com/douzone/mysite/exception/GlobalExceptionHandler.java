@@ -46,6 +46,7 @@ public class GlobalExceptionHandler {
 			OutputStream os = response.getOutputStream();
 			os.write(jsonString.getBytes("utf-8"));
 			os.close();
+			
 		} else if (accept.matches(".*text/html.*") == true) {
 			// 4. 사과페이지(html 응답, 정상종료)
 			request.setAttribute("exception", errors.toString());

@@ -16,11 +16,13 @@
 
 		<div id="wrapper">
 			<div id="content" class="full-screen">
+			
 				<ul class="admin-menu">
-					<li><a href="${pageContext.request.contextPath }/blog/basic">기본설정</a></li>
+					<li><a href="${pageContext.request.contextPath }/blog/basic/${authUser.id}">기본설정</a></li>
 					<li class="selected">카테고리</li>
 					<li><a href="${pageContext.request.contextPath }/blog/write">글작성</a></li>
 				</ul>
+				
 		      	<table class="admin-cat">
 		      		<tr>
 		      			<th>번호</th>
@@ -29,29 +31,30 @@
 		      			<th>설명</th>
 		      			<th>삭제</th>      			
 		      		</tr>
-		      		<c:forEach items="${category }"	var="vo" varStatus="status">	
+		      		
+		      		<c:forEach items="${list }"	var="vo" varStatus="status">	
 			      		<tr>
-							<td>${vo.no }</td>
+							<td>${status.count}</td>
 							<td>${vo.name }</td>
 							<td>카운트해서 전체 게시물 갯수 세면 그만임</td>
-							<td>${vo.desc }</td>
+							<td>${vo.description }</td>
 							<td>
-								<c:if test="${vo.desc eq '미분류'}">
-									<img src="${pageContext.request.contextPath}/assets/images/delete.jpg">
+								<c:if test="${vo.name eq '미분류'}">
+									&nbsp;
 								</c:if>
 								
-								<c:if test="${vo.desc ne '미분류'}">
-									<img src="${pageContext.request.contextPath}/assets/images/delete.jpg">
+								<c:if test="${vo.name ne '미분류'}">
+									<a href="${pageContext.request.contextPath}/category/delete/${vo.no }">
+									<img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
 								</c:if>			
 							</td>
 						</tr>  	
 		      		</c:forEach>
 				</table>
-      	
+				
       			<form action="${pageContext.request.contextPath }/category/insert" method="post">
 	      			<h4 class="n-c">새로운 카테고리 추가</h4>
-	      			${authUser.id }
-	      			<input type="hidden" value="${authUser.id }" name="${blogId }"/>
+	      			<input type="hidden" name="blogid" value="${authUser.id }" />
 			      	<table id="admin-cat-add">
 			      		<tr>
 			      			<td class="t">카테고리명</td>

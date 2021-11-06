@@ -8,7 +8,7 @@
 	<h1>${authUser.name }의 Spring 이야기</h1>
 	<ul class="menu">
 		<li><a href="${pageContext.request.contextPath }/user/logout">로그아웃</a></li>
-		<li><a
-			href="${pageContext.request.contextPath }/blog/basic">블로그관리</a></li>
+		<li><a href="${pageContext.request.contextPath }/blog/basic/${authUser.id }">블로그관리</a></li>
+		<li><a href="${pageContext.request.contextPath }/blog/main/${authUser.id }">블로그메인</a></li>
 	</ul>
 </div>

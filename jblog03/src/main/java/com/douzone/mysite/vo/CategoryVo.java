@@ -4,7 +4,7 @@ public class CategoryVo {
 
 	private Long no;
 	private String name;
-	private String desc;
+	private String description;
 	private String blogId;
 
 	/**
@@ -36,17 +36,17 @@ public class CategoryVo {
 	}
 
 	/**
-	 * @return the desc
+	 * @return the description
 	 */
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
-	 * @param desc the desc to set
+	 * @param description the description to set
 	 */
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class CategoryVo {
 
 	@Override
 	public String toString() {
-		return "CategoryVo [no=" + no + ", name=" + name + ", desc=" + desc + ", blogId=" + blogId + "]";
+		return "CategoryVo [no=" + no + ", name=" + name + ", description=" + description + ", blogId=" + blogId + "]";
 	}
 
 }
