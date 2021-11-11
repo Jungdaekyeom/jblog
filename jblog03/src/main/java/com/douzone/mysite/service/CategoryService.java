@@ -14,8 +14,8 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	public List<CategoryVo> findAll() {
-		return categoryRepository.findAll();
+	public List<CategoryVo> findAll(String id) {
+		return categoryRepository.findAll(id);
 	}
 	
 	public CategoryVo insert(CategoryVo categoryVo) {

@@ -16,16 +16,16 @@
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
 					<li class="selected">기본설정</li>
-					<li><a href="${pageContext.request.contextPath }/blog/category">카테고리</a></li>
-					<li><a href="${pageContext.request.contextPath }/blog/write">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath }/blog/${authUser.id }/admin/category">카테고리</a></li>
+					<li><a href="${pageContext.request.contextPath }/blog/${authUser.id }/admin/write">글작성</a></li>
 				</ul>
 				
-				<form action="${pageContext.request.contextPath }/basic/update" method="post" enctype="multipart/form-data">
+				<form action="${pageContext.request.contextPath }/blog/${authUser.id }/basic/update" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="id" value="${basic.id }"/>
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>
-			      			<td><input type="text" size="40" name="title" value="${basic.title }">${basic.title }</td>
+			      			<td><input type="text" size="40" name="title" value="${basic.title }"></td>
 			      		</tr>
 			      		<tr>
 			      			<td class="t">로고 이미지</td>

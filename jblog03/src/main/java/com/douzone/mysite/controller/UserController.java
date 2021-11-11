@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.douzone.mysite.security.Auth;
 import com.douzone.mysite.security.AuthUser;
+import com.douzone.mysite.service.CategoryService;
 import com.douzone.mysite.service.UserService;
+import com.douzone.mysite.vo.CategoryVo;
 import com.douzone.mysite.vo.UserVo;
 
 @Controller
@@ -21,19 +23,39 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private CategoryService categoryService;
+	
 	@RequestMapping(value="/join", method=RequestMethod.GET)
+	// 요청 파라미터를 객채에 담을 때 사용
 	public String join(@ModelAttribute UserVo vo) {
 		return "user/join";
 	}
 
+	// @Valid : 검증하는 것
+	// 바인딩하면서 바로 발리데이션 함
+	// BindingResult result : 바인딩하다가 조건이 맞지 않으면, 에러를 출력해줌.
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(@ModelAttribute @Valid UserVo vo, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			model.addAllAttributes(result.getModel());
 			return "user/join";
 		}
+		// 바인딩->검증해서 에러가 발생되지 않으면, 서비스 소환!
 		userService.join(vo);
+		// 계정 생성 시, 카테고리의 미분류 항목이 바로 만들어질 수 있도록!
+		CategoryVo categoryVo = new CategoryVo();
+		categoryVo.setName("미분류");
+		categoryVo.setDescription("미분류 항목");
+		categoryVo.setBlogId(vo.getId());
+		categoryService.insert(categoryVo);
 		return "redirect:/user/joinsuccess";
+		
+		
+		// 회원가입 시
+		// 1. id / title / logo
+		// 2. 1번의 id를 기반으로 미분류 항목 카테고리를 제작
+		// 3. 
 	}
 	
 	@RequestMapping("/joinsuccess")

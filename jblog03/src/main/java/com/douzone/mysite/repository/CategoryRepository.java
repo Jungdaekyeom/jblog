@@ -14,8 +14,8 @@ public class CategoryRepository {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<CategoryVo> findAll() {
-		return sqlSession.selectList("category.findAll");
+	public List<CategoryVo> findAll(String id) {
+		return sqlSession.selectList("category.findAll", id);
 	}
 	
 	public CategoryVo insert(CategoryVo categoryVo) {

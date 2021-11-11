@@ -13,8 +13,8 @@ import com.douzone.mysite.vo.UserVo;
 // 1. join.jsp에서 넘어옴
 @Controller("userApiController")
 @RequestMapping("/user/api")
-
 public class UserController {
+	
 	// 의존성 주입
 	@Autowired
 	private UserService userService;
@@ -23,14 +23,6 @@ public class UserController {
 	@RequestMapping("/checkid")
 	public JsonResult checkid(@RequestParam(value = "id", required = true, defaultValue = "") String id) {
 		UserVo userVo = userService.getUser(id);
-
-		///////////////////////////////////////////
-		// Map<String, Object> map = new HashMap<>();
-		// map.put("result", "success");
-		// map.put("data", userVo != null);
-		// map.put("message", null);
-		///////////////////////////////////////////
-
 		return JsonResult.success(userVo != null);
 		
 	}

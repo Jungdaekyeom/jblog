@@ -15,7 +15,7 @@ import com.douzone.mysite.service.BasicService;
 import com.douzone.mysite.vo.BasicVo;
 
 @Controller
-@RequestMapping("/basic")
+@RequestMapping("/blog/{id}/basic")
 public class BasicController {
 	private static final Log LOGGER = LogFactory.getLog(BasicController.class);
 
@@ -38,6 +38,6 @@ public class BasicController {
 		basicService.update(basicVo);
 		servletContext.setAttribute("basic", basicVo);
 
-		return "redirect:/blog/basic/" + basicVo.getId();
+		return "redirect:/blog/" + basicVo.getId() + "/admin/basic";
 	}
 }

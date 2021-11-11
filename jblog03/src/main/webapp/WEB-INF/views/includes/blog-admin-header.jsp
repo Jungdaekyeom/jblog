@@ -5,10 +5,10 @@
 	pageEncoding="UTF-8"%>
 	
 <div id="header">
-	<h1>${authUser.name }의 Spring 이야기</h1>
+	<h1>${basic.title }</h1>
 	<ul class="menu">
 		<li><a href="${pageContext.request.contextPath }/user/logout">로그아웃</a></li>
-		<li><a href="${pageContext.request.contextPath }/blog/basic/${authUser.id }">블로그관리</a></li>
-		<li><a href="${pageContext.request.contextPath }/blog/main/${authUser.id }">블로그메인</a></li>
+		<li><a href="${pageContext.request.contextPath }/blog/${authUser.id }/admin/basic">블로그관리</a></li>
+		<li><a href="${pageContext.request.contextPath }/blog/${authUser.id }/1">블로그메인</a></li>
 	</ul>
 </div>

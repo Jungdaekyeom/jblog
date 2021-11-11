@@ -18,7 +18,19 @@
 	<!-- auto proxy -->
 	<aop:aspectj-autoproxy />
 
-	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
+		
+	<!-- 정적 자원 접근 실패
+
+    html, css, js 등의 파일 접근에 실패한다.
+
+    DispatcherServlet 이 모든 URL처리에 서블릿 매핑을 하였기 때문에 톰캣은 정적 자원에 대한 URL처리도
+      DispatcherServlet에게 넘기기 때문이다. ( 즉, DefaultServlet에 위임을 하지 못한다. )
+
+	 -->
+	<!-- HandlerMapping이 URL과 컨트롤러의 메소드(핸들러) 와의 매핑 정보를 가지고 있다. -->
+    <!-- HandlerMapping에서 정적 자원에 대한 URL은 DefaultServlet으로 위임할 수 있도록 설정 해주어야 한다. -->
+    
+    <!-- validator, conversionService, messageConverter를 자동으로 등록 -->
 	<mvc:annotation-driven>
 		<mvc:message-converters>
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -45,7 +57,7 @@
 
 	<!-- 서블릿 컨테이너(tomcat)의 DefaultServlet 위임(Delegate) Handler -->
 	<mvc:default-servlet-handler />
-
+ 
 	<!-- mvc url-resource mapping -->
 	<mvc:resources mapping="/gallery/images/**" location="file:/upload-mysite/" />
 
@@ -106,6 +118,8 @@
 		</property>
 	</bean>		
 	
+	<!-- 웹 어픞리케이션 컨텍스트 설정 -->
+	<!-- Controller 빈을 등록하고, 빈ㅇ의 이름(URL)으로 핸들러가 매핑된다. -->
 	<context:annotation-config />
 	<context:component-scan	base-package="com.douzone.mysite.controller, com.douzone.mysite.exception" />
 </beans>

@@ -17,34 +17,31 @@
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
-					<h4>Spring Camp 2016 참여기</h4>
+					<h4>${post[0].title }</h4>
 					<p>
-						${basic.title }				
+					${post[0].contents }
 					<p>
 				</div>
 				<ul class="blog-list">
-					<li><a href="">Spring Camp 2016 참여기...</a> <span>2015/05/02</span>	</li>
-					<li><a href="">Spring Boot 사용법 정리</a> <span>2015/05/02</span>	</li>
-					<li><a href="">Spring Security 설정법</a> <span>2015/05/02</span>	</li>
-					<li><a href="">JPA + Hinernate</a> <span>2015/05/02</span>	</li>
-					<li><a href="">AOP 활용하기 - DAO 실행시간 측정하기</a> <span>2015/05/02</span>	</li>
+					<c:forEach items="${post }"	var="vo" varStatus="status">		
+						<li><a href="${pageContext.request.contextPath }">${vo.title }</a><span>${vo.regDate }</span></li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
 
 		<div id="extra">
 			<div class="blog-logo">
-				<img src="${basic.logo }">
+				<img src="${pageContext.request.contextPath }${basic.logo }">
 			</div>
 		</div>
 
 		<div id="navigation">
 			<h2>카테고리</h2>
 			<ul>
-				<li><a href="">닥치고 스프링</a></li>
-				<li><a href="">스프링 스터디</a></li>
-				<li><a href="">스프링 프로젝트</a></li>
-				<li><a href="">기타</a></li>
+			<c:forEach items="${category }"	var="vo" varStatus="status">		
+				<li><a href="${pageContext.request.contextPath }/blog/${id}/${vo.no}">${vo.name }</a></li>
+			</c:forEach>
 			</ul>
 		</div>
 		<c:import url="/WEB-INF/views/includes/blog-admin-footer.jsp" />

@@ -8,19 +8,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
-
 </head>
 <body>
 	<div id="container">
 		<c:import url="/WEB-INF/views/includes/blog-admin-header.jsp" />
-
 		<div id="wrapper">
 			<div id="content" class="full-screen">
-			
 				<ul class="admin-menu">
-					<li><a href="${pageContext.request.contextPath }/blog/basic/${authUser.id}">기본설정</a></li>
+					<li><a href="${pageContext.request.contextPath }/blog/${authUser.id }/admin/basic">기본설정</a></li>
 					<li class="selected">카테고리</li>
-					<li><a href="${pageContext.request.contextPath }/blog/write">글작성</a></li>
+					<li><a href="${pageContext.request.contextPath }/blog/${authUser.id }/admin/write">글작성</a></li>
 				</ul>
 				
 		      	<table class="admin-cat">
@@ -32,7 +29,7 @@
 		      			<th>삭제</th>      			
 		      		</tr>
 		      		
-		      		<c:forEach items="${list }"	var="vo" varStatus="status">	
+		      		<c:forEach items="${category }"	var="vo" varStatus="status">	
 			      		<tr>
 							<td>${status.count}</td>
 							<td>${vo.name }</td>
@@ -44,7 +41,7 @@
 								</c:if>
 								
 								<c:if test="${vo.name ne '미분류'}">
-									<a href="${pageContext.request.contextPath}/category/delete/${vo.no }">
+									<a href="${pageContext.request.contextPath}/blog/${authUser.id }/admin/category/delete/${vo.no }">
 									<img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
 								</c:if>			
 							</td>
@@ -52,7 +49,7 @@
 		      		</c:forEach>
 				</table>
 				
-      			<form action="${pageContext.request.contextPath }/category/insert" method="post">
+      			<form action="${pageContext.request.contextPath}/blog/${authUser.id }/admin/category/insert" method="post">
 	      			<h4 class="n-c">새로운 카테고리 추가</h4>
 	      			<input type="hidden" name="blogid" value="${authUser.id }" />
 			      	<table id="admin-cat-add">
