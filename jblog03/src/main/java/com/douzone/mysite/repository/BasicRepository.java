@@ -11,6 +11,11 @@ public class BasicRepository {
 
 	@Autowired
 	private SqlSession sqlSession;
+
+	public boolean insert(BasicVo basicVo) {
+		int count = sqlSession.insert("basic.insert", basicVo);
+		return count == 1;
+	}	
 	
 	public BasicVo find(String id) {
 		return sqlSession.selectOne("basic.find", id);

@@ -44,11 +44,6 @@ public class UserController {
 		// 바인딩->검증해서 에러가 발생되지 않으면, 서비스 소환!
 		userService.join(vo);
 		// 계정 생성 시, 카테고리의 미분류 항목이 바로 만들어질 수 있도록!
-		CategoryVo categoryVo = new CategoryVo();
-		categoryVo.setName("미분류");
-		categoryVo.setDescription("미분류 항목");
-		categoryVo.setBlogId(vo.getId());
-		categoryService.insert(categoryVo);
 		return "redirect:/user/joinsuccess";
 		
 		

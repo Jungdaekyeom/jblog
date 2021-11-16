@@ -14,10 +14,10 @@
 		]]>
 	</insert>
 		
-	<insert id="delete" parameterType="long">
+	<delete id="delete" parameterType="long">
 		<![CDATA[
 		delete from category where no=#{no}
 		]]>
-	</insert>
+	</delete>
 	
 </mapper>

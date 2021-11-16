@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 public class UserVo {
 	@NotEmpty
-	@Email // 정규표현식 대신 hibernate로 대체해서 씀
+	@Email
 	private String id;
 
 	// validation
@@ -20,6 +20,7 @@ public class UserVo {
 	@Length(min = 4, max = 16)
 	private String password;
 	private String joinDate;
+	private String role;
 
 	public String getId() {
 		return id;
@@ -53,9 +54,18 @@ public class UserVo {
 		this.joinDate = joinDate;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	@Override
 	public String toString() {
-		return "UserVo [id=" + id + ", name=" + name + ", password=" + password + ", joinDate=" + joinDate + "]";
+		return "UserVo [id=" + id + ", name=" + name + ", password=" + password + ", joinDate=" + joinDate + ", role="
+				+ role + "]";
 	}
 
 }

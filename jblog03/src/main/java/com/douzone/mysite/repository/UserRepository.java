@@ -6,8 +6,10 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.douzone.mysite.exception.UserRepositoryException;
+import com.douzone.mysite.vo.CategoryVo;
 import com.douzone.mysite.vo.UserVo;
 
 @Repository
@@ -22,7 +24,7 @@ public class UserRepository {
 
 		return sqlSession.selectOne("user.findByIdAndPassword", map);
 	}
-
+	
 	public boolean insert(UserVo vo) {
 		int count = sqlSession.insert("user.insert", vo);
 		return count == 1;

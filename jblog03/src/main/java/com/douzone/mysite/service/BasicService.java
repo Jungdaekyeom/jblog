@@ -23,6 +23,11 @@ public class BasicService {
 	@Autowired
 	private BasicRepository basicRepository;
 
+	// 회원가입시 자동으로 블로그가 만들어 짐
+	public boolean insert(BasicVo basicVo) {
+		return basicRepository.insert(basicVo);
+	}
+	
 	public BasicVo find(String id) {
 		return basicRepository.find(id);
 	}

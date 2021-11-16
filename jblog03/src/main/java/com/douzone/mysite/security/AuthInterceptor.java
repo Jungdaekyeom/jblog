@@ -37,7 +37,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
 		// 5. Type과 Method에 @Auth가 적용이 안되어 있는 경우
 		// method에 @Auth가 없는 경우, 즉 인증이 필요 없는 요청.
-		// 일반 유저는 여기서 반환됨.
+		// 어노테이션
+		
 		if (auth == null) {
 			return true;
 		}
@@ -50,6 +51,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 
+		// 여기서부터 주이가 가르쳐준 로그인 확인을 할 수 있는 부분
+		
 		// 7. 세션이 존재하면 유효한 유저인지 확인
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if (authUser == null) {
@@ -64,9 +67,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		if ("USER".equals(role)) {
 			return true;
 		}
-
+		
+		//9.@Auth의 role이 "ADMIN" 인 경우, authUser의 role은 "ADMIN" 이어야 한다.
+		if("ADMIN".equals(authUser.getRole()) == false) {
+			response.sendRedirect(request.getContextPath());
+			return false;
+		}
+		
 		return true;
-
 	}
-
 }
