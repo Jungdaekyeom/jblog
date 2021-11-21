@@ -4,7 +4,13 @@
 
 	<select id="findAll" parameterType="string" resultType="categoryvo">
 		<![CDATA[
-		select no, name, description, blog_id from category where blog_id=#{id}
+		select no, name, description, blog_id as blogId from category where blog_id=#{id}
+		]]>
+	</select>
+	
+	<select id="findMin" parameterType="long" resultType="long">
+		<![CDATA[
+		select min(no) from category where blog_id=#{id}
 		]]>
 	</select>
 	

@@ -29,24 +29,56 @@ public class BlogController {
 	private PostService postService;
 	
 	// 블로그 메인을 띄우는 함수
-	@RequestMapping("/{id}/{no}")
-	public String blogMain(
+	@RequestMapping(value = {"/{id}/{categoryNo}/{postNo}"})
+	public String blogFirstMain(
 			@PathVariable("id") String id,
-			@PathVariable("no") Long no,
+			@PathVariable("categoryNo") Long categoryNo,
+			@PathVariable("postNo") Long postNo,
 			Model model) {
-		
+				
 		BasicVo basicVo = new BasicVo();
 		List<CategoryVo> categoryVo = null;
 		List<PostVo> postVo = null;
+		// 해당 최소 카테고리 중 가장 상단에 위치시켜야 할 것.
+		PostVo postMain = new PostVo();
 		
 		basicVo = basicService.find(id);
 		categoryVo = categoryService.findAll(id);
-		postVo = postService.findAllByCategoryNo(no);
 		
+		// 메인 화면에서 들어올 때
+		if(categoryNo == 0) {
+			System.out.println(id);
+			// 카테고리 최소값
+			categoryNo = categoryService.findMin(id);
+			System.out.println(categoryNo);
+
+			// 하단 게시글에 나열해야 할 부분
+			postVo = postService.findAllByCategoryNo(categoryNo);
+			System.out.println(postVo);
+
+		}
+		
+		// 우측하단 카테고리 창에서 들어올 때
+		 else {
+			postVo = postService.findAllByCategoryNo(categoryNo);
+		
+		}
+		
+		if(postNo == 0) {
+			postMain = postService.findNewMainContents(categoryNo);
+			postMain = postService.findMainContents(postMain);
+		} else {
+			postMain.setNo(postNo);
+			postMain.setCategoryNo(categoryNo);
+			postMain = postService.findMainContents(postMain);
+		}
+		
+
 		model.addAttribute("basic", basicVo);
 		model.addAttribute("category", categoryVo);
 		model.addAttribute("post", postVo);
-		
+		model.addAttribute("postMain", postMain);
+
 		return "blog/blog-main";
 	}
 

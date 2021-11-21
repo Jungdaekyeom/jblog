@@ -10,10 +10,26 @@
 	
 	<select id="findAllByCategoryNo" parameterType="long" resultType="postvo">
 		<![CDATA[
-		select no, title, contents, reg_date, category_no
+		select no, title, contents, reg_date as regDate, category_no as categoryNo
 		from post
 		where category_no = #{categoryNo} order by reg_date desc;
 		]]>
 	</select>
-	
+		
+	<select id="findMainContents" parameterType="postvo" resultType="postvo">
+		<![CDATA[
+		select no, title, contents, reg_date as regDate, category_no as categoryNo
+		from post
+		where category_no = #{categoryNo} and no = #{no};
+		]]>
+	</select>
+			
+	<select id="findNewMainContents" parameterType="postvo" resultType="postvo">
+		<![CDATA[
+		select no, title, contents, reg_date as regDate, category_no as categoryNo
+		from post
+		where category_no = #{categoryNo} order by reg_date desc limit 1;
+		]]>
+	</select>
+
 </mapper>

@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div id="container">
-		<c:import url="/WEB-INF/views/includes/blog-admin-header.jsp" />
+		<c:import url="/WEB-INF/views/includes/blog-header.jsp" />
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
@@ -46,7 +46,7 @@
 				</form>
 			</div>
 		</div>
-		<c:import url="/WEB-INF/views/includes/blog-admin-footer.jsp" />
+		<c:import url="/WEB-INF/views/includes/blog-footer.jsp" />
 	</div>
 </body>
 </html>

@@ -8,7 +8,9 @@
 	<h1>${basic.title }</h1>
 	<ul class="menu">
 		<li><a href="${pageContext.request.contextPath }/user/logout">로그아웃</a></li>
-		<li><a href="${pageContext.request.contextPath }/blog/${authUser.id }/admin/basic">블로그관리</a></li>
-		<li><a href="${pageContext.request.contextPath }/blog/${authUser.id }/1">블로그메인</a></li>
+		<c:if test="${authUser.id == basic.id}">
+			<li><a href="${pageContext.request.contextPath }/blog/${authUser.id }/admin/basic">블로그관리</a></li>
+		</c:if>
+		<li><a href="${pageContext.request.contextPath }/blog/${authUser.id }/0/0">블로그메인</a></li>
 	</ul>
 </div>

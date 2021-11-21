@@ -19,6 +19,10 @@ public class CategoryRepository {
 		return sqlSession.selectList("category.findAll", id);
 	}
 	
+	public Long findMin(String id) {
+		return sqlSession.selectOne("category.findMin", id);
+	}
+	
 	public CategoryVo insert(CategoryVo categoryVo) {
 		return sqlSession.selectOne("category.insert", categoryVo);
 	}	

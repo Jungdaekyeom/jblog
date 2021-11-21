@@ -18,6 +18,10 @@ public class CategoryService {
 		return categoryRepository.findAll(id);
 	}
 	
+	public Long findMin(String id) {
+		return categoryRepository.findMin(id);
+	}
+	
 	public CategoryVo insert(CategoryVo categoryVo) {
 		return categoryRepository.insert(categoryVo);
 	}	

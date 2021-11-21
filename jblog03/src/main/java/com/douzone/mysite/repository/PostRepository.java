@@ -21,5 +21,14 @@ public class PostRepository {
 	public List<PostVo> findAllByCategoryNo(Long categoryNo){
 		return sqlSession.selectList("post.findAllByCategoryNo", categoryNo);
 	}
+	
+	public PostVo findMainContents(PostVo postVo) {
+		return sqlSession.selectOne("post.findMainContents", postVo);
+	}
+	
+	public PostVo findNewMainContents(Long categoryNo) {
+		return sqlSession.selectOne("post.findNewMainContents", categoryNo);
+	}
+	
 
 }

@@ -12,19 +12,19 @@
 <body>
 	<div id="container">
 
-		<c:import url="/WEB-INF/views/includes/blog-admin-header.jsp" />
+		<c:import url="/WEB-INF/views/includes/blog-header.jsp" />
 
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
-					<h4>${post[0].title }</h4>
+				<h4>${postMain.title }</h4>
 					<p>
-					${post[0].contents }
+					${postMain.contents }
 					<p>
 				</div>
 				<ul class="blog-list">
 					<c:forEach items="${post }"	var="vo" varStatus="status">		
-						<li><a href="${pageContext.request.contextPath }">${vo.title }</a><span>${vo.regDate }</span></li>
+						<li><a href="${pageContext.request.contextPath }/blog/${id}/${vo.categoryNo }/${vo.no}">${vo.title }</a><span>${vo.regDate }</span></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -40,11 +40,11 @@
 			<h2>카테고리</h2>
 			<ul>
 			<c:forEach items="${category }"	var="vo" varStatus="status">		
-				<li><a href="${pageContext.request.contextPath }/blog/${id}/${vo.no}">${vo.name }</a></li>
+				<li><a href="${pageContext.request.contextPath }/blog/${id}/${vo.no}/0">${vo.name }</a></li>
 			</c:forEach>
 			</ul>
 		</div>
-		<c:import url="/WEB-INF/views/includes/blog-admin-footer.jsp" />
+		<c:import url="/WEB-INF/views/includes/blog-footer.jsp" />
 	</div>
 </body>
 </html>

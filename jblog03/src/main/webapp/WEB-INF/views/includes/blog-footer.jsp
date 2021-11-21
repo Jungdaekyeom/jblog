@@ -6,6 +6,6 @@
 
 <div id="footer">
 	<p>
-		<strong>${authUser.name }의 Spring 이야기</strong> is powered by JBlog (c)2021
+		<strong>${basic.title }</strong> is powered by JBlog (c)2021
 	</p>
 </div>

@@ -21,4 +21,12 @@ public class PostService {
 	public List<PostVo> findAllByCategoryNo(Long categoryNo) {
 		return postRepository.findAllByCategoryNo(categoryNo);
 	}
+
+	public PostVo findMainContents(PostVo postVo) {
+		return postRepository.findMainContents(postVo);
+	}
+
+	public PostVo findNewMainContents(Long categoryNo) {
+		return postRepository.findNewMainContents(categoryNo);
+	}
 }
