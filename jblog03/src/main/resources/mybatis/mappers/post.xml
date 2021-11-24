@@ -8,6 +8,18 @@
 		]]>
 	</update>
 	
+	<delete id="delete" parameterType="long">
+		<![CDATA[
+		delete from post where no=#{no}
+		]]>
+	</delete>
+		
+	<delete id="deleteAllCategoryNo" parameterType="long">
+		<![CDATA[
+		delete from post where category_no=#{no}
+		]]>
+	</delete>
+	
 	<select id="findAllByCategoryNo" parameterType="long" resultType="postvo">
 		<![CDATA[
 		select no, title, contents, reg_date as regDate, category_no as categoryNo

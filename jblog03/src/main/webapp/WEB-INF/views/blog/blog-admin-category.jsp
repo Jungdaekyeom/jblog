@@ -33,7 +33,7 @@
 			      		<tr>
 							<td>${status.count}</td>
 							<td>${vo.name }</td>
-							<td>카운트해서 전체 게시물 갯수 세면 그만임</td>
+							<td>${vo.count }</td>
 							<td>${vo.description }</td>
 							<td>
 								<c:if test="${vo.name eq '미분류'}">
@@ -42,7 +42,8 @@
 								
 								<c:if test="${vo.name ne '미분류'}">
 									<a href="${pageContext.request.contextPath}/blog/${authUser.id }/admin/category/delete/${vo.no }">
-									<img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a>
+										<img src="${pageContext.request.contextPath}/assets/images/delete.jpg">
+									</a>
 								</c:if>			
 							</td>
 						</tr>  	

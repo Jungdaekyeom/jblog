@@ -2,16 +2,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<!-- form태그지만, 내부에서는 자바코드로 돌아감 -->
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<script src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
 <script>
 $(function(){
 	$("#btn-check-id").click(function() {
@@ -28,7 +27,6 @@ $(function(){
 			// 통신 에러 체크
 			error: function(xhr, status, e){
 				console.log(status, e);
-				
 			},
 			success: function(response) {
 				console.log(response);
@@ -52,6 +50,7 @@ $(function(){
 		});		
 	});	
 });
+
 </script>
 </head>
 <body>

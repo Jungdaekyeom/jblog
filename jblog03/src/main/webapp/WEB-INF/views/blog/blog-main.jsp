@@ -17,19 +17,40 @@
 		<div id="wrapper">
 			<div id="content">
 				<div class="blog-content">
-				<h4>${postMain.title }</h4>
-					<p>
-					${postMain.contents }
-					<p>
+				
+				<c:choose>
+					<c:when test="${ postMain.title ne null}">
+						<h4>${postMain.title }</h4>
+						<p>
+						${postMain.contents }
+						<p>
+					</c:when>
+					<c:when test="${ postMain.title eq null}">
+						<h4>게시글이 비어있습니다.</h4>
+						<p>
+						게시글을 추가해 주세요.
+						<p>					
+					</c:when>
+				</c:choose>
+
 				</div>
 				<ul class="blog-list">
 					<c:forEach items="${post }"	var="vo" varStatus="status">		
-						<li><a href="${pageContext.request.contextPath }/blog/${id}/${vo.categoryNo }/${vo.no}">${vo.title }</a><span>${vo.regDate }</span></li>
+						<li>
+							<a href="${pageContext.request.contextPath }/blog/${id}/${vo.categoryNo }/${vo.no}">${vo.title }</a>
+							<c:if test="${authUser.id eq basic.id}">
+								<span>
+									<a href="${pageContext.request.contextPath }/blog/${authUser.id }/admin/post/delete/${vo.categoryNo }/${vo.no }">
+										<img src="${pageContext.request.contextPath}/assets/images/delete.jpg">
+									</a>
+								</span>
+							</c:if>
+							<span>${vo.regDate }</span>
+						</li>
 					</c:forEach>
 				</ul>
 			</div>
 		</div>
-
 		<div id="extra">
 			<div class="blog-logo">
 				<img src="${pageContext.request.contextPath }${basic.logo }">

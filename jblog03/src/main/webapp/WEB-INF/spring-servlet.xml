@@ -51,7 +51,7 @@
 
 		<mvc:argument-resolvers>
 			<bean
-				class="com.douzone.mysite.security.AuthUserHandlerMethodArgumentResolver" />
+				class="com.douzone.jblog.security.AuthUserHandlerMethodArgumentResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
@@ -59,7 +59,7 @@
 	<mvc:default-servlet-handler />
  
 	<!-- mvc url-resource mapping -->
-	<mvc:resources mapping="/gallery/images/**" location="file:/upload-mysite/" />
+	<mvc:resources mapping="/gallery/images/**" location="file:/upload-jblog/" />
 
 	<!-- Interceptor -->
 	<!-- "/user/auth" : 로그인 url -->
@@ -67,12 +67,12 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/auth" />
-			<bean class="com.douzone.mysite.security.LoginInterceptor" />
+			<bean class="com.douzone.jblog.security.LoginInterceptor" />
 		</mvc:interceptor>
 
 		<mvc:interceptor>
 			<mvc:mapping path="/user/logout" />
-			<bean class="com.douzone.mysite.security.LogoutInterceptor" />
+			<bean class="com.douzone.jblog.security.LogoutInterceptor" />
 		</mvc:interceptor>
 		
 		<!-- path="/**" 어딜 지나가든 -->
@@ -85,7 +85,7 @@
 			<mvc:exclude-mapping path="/user/logout" />
 			<!-- defaultServlet이 처리하는 경로는 제외 -->
 			<mvc:exclude-mapping path="/assets/**" />
-			<bean class="com.douzone.mysite.security.AuthInterceptor" />
+			<bean class="com.douzone.jblog.security.AuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 
@@ -121,5 +121,5 @@
 	<!-- 웹 어픞리케이션 컨텍스트 설정 -->
 	<!-- Controller 빈을 등록하고, 빈ㅇ의 이름(URL)으로 핸들러가 매핑된다. -->
 	<context:annotation-config />
-	<context:component-scan	base-package="com.douzone.mysite.controller, com.douzone.mysite.exception" />
+	<context:component-scan	base-package="com.douzone.jblog.controller, com.douzone.jblog.exception" />
 </beans>
