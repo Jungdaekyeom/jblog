@@ -55,13 +55,11 @@ public class BlogController {
 			// 하단 게시글에 나열해야 할 부분
 			postVo = postService.findAllByCategoryNo(categoryNo);
 			System.out.println(postVo);
-
 		}
 		
 		// 우측하단 카테고리 창에서 들어올 때
 		 else {
 			postVo = postService.findAllByCategoryNo(categoryNo);
-		
 		}
 		
 		if(postNo == 0) {
@@ -73,12 +71,11 @@ public class BlogController {
 			postMain = postService.findMainContents(postMain);
 		}
 		
-
 		model.addAttribute("basic", basicVo);
 		model.addAttribute("category", categoryVo);
 		model.addAttribute("post", postVo);
 		model.addAttribute("postMain", postMain);
-
+		
 		return "blog/blog-main";
 	}
 
@@ -94,7 +91,8 @@ public class BlogController {
 	}
 
 	@RequestMapping( "/{id}/admin/category" )
-	public String blogAdminCategory(@PathVariable("id") String id,
+	public String blogAdminCategory(
+			@PathVariable("id") String id,
 			Model model) {
 		
 		BasicVo basicVo = new BasicVo();
@@ -108,7 +106,8 @@ public class BlogController {
 	}
 
 	@RequestMapping( "/{id}/admin/write" )
-	public String blogAdminWrite(@PathVariable("id") String id,
+	public String blogAdminWrite(
+			@PathVariable("id") String id,
 			Model model) {
 		
 		BasicVo basicVo = new BasicVo();

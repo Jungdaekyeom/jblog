@@ -9,15 +9,15 @@ import org.hibernate.validator.constraints.Length;
 public class UserVo {
 	@NotEmpty
 	@Email
+	@Pattern(regexp = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+$")
 	private String id;
 
-	@NotEmpty(message="해당 항목을 채워주세요.")
+	@NotEmpty
 	@Length(min = 2, max = 5)
 	private String name;
 
-	@NotEmpty(message="해당 항목을 채워주세요.")
-	@Length(min = 4, max = 16)
-	@Pattern(regexp = "^(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,}$")
+	@NotEmpty
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*-]).{8,16}$")
 	private String password;
 	private String joinDate;
 	private String role;
