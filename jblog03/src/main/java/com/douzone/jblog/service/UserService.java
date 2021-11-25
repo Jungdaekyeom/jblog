@@ -45,7 +45,7 @@ public class UserService {
 		BasicVo basicVo = new BasicVo();
 		basicVo.setId(vo.getId());
 		basicVo.setTitle(vo.getId() + "의 블로그");
-		basicVo.setLogo(profile);
+		// basicVo.setLogo(profile);
 		basicRepository.insert(basicVo);
 		
 		// 미분류 카테고리 만들기

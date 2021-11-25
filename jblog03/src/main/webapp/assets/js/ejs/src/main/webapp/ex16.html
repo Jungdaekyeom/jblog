@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src='browser-detect.js' type="text/javascript"></script>
+<script>
+
+/*
+Event Propagatation(Event Bubbling)
+특정 이벤트가 발생했을 때 그 이벤트가 상위/하위 엘리먼트로 전파되어 가는 것
+<= IE8: outer-div => inner-div => header => text
+*/
+
+// 문서 요소의 load 이벤트는 document 객체에서 버블링이 중지되고 window 객체로 전파되지 않는다.
+// 이벤트 전파 단계
+// 1. 캡처링
+// 2. 타깃 객체의 이벤트 핸들러 / 리스너 호출
+// 3. 이벤트 버블링
+window.addEventListener("load", function(){
+	
+	document
+		.getElementById('outer-div')
+		.addEventListener('click', function(){
+			console.log('아우터 디브');
+	});
+	
+	document
+		.getElementById('inner-div')
+		.addEventListener('click', function(e){
+			var event = e || window.event /* <= ie8 */ // e가 널이 아니라면
+			// prevent event's propagation(bubbling)
+			event.cancelBubble = true; /* <= ie8 */
+			event.stopPropagation && event.stopPropagation(); /* standard other browser */
+			
+			console.log('이너 디브~');	
+	});
+	
+	document
+		.getElementById('header')
+		.addEventListener('click', function(){
+			console.log('헤더~')	;	
+	});
+	
+	document
+	.getElementById('text')
+	.addEventListener('click', function(){
+		console.log('텍스트');
+	});
+});
+
+</script>
+</head>
+<body>
+	<h1>DOM(Document Object Model)</h1>
+	<h2>7. Event Propagation(Bubbling)</h2>
+	
+	<div id='outer-div'>
+		<div id='inner-div'>
+			<h1 id='header'>
+				<span id='text'>text</span>
+			</h1>
+		</div>
+	</div>
+</body>
+</html>

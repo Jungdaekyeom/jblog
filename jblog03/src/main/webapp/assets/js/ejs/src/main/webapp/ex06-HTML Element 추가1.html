@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src='browser-detect.js' type="text/javascript"></script>
+<script>
+window.addEventListener("load", function(){
+	var h3Element = document.createElement("h3");
+	var textNode = document.createTextNode("Hello DOM");
+	
+	// append 사용
+	// h3 태그에 Hello DOM append
+	h3Element.append(textNode);
+	
+	// 비주얼적인 효과, 필수적인거 아님.
+	setTimeout(function(){
+		document.body.appendChild(h3Element);
+	}, 2000);
+});
+</script>
+</head>
+<body>
+	<h1>DOM(Document Object Model)</h1>
+	<h2>2. HTML Element 추가</h2>
+</body>
+</html>

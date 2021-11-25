@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+var child = window.open("", "", "width=200, height=100");
+
+// 현재 모니터의 width 및 height를 구하기
+var widthScreen = screen.width;
+var heightScreen = screen.height;
+console.log(widthScreen + " : " + heightScreen); // 1536 : 864
+
+setTimeout(function(){
+	child.moveTo(0, 0);
+	child.resizeTo(widthScreen, heightScreen); // 팝업이 열리고 2초 후에 확대됨
+	// 커져 있는 놈을 중앙으로 서서히 작게 만듬
+	setInterval(function(){
+		// 0.1초마다 가운데를 기준으로 사이즈를 줄여나감
+		child.resizeBy(-20, -20);
+		child.moveBy(10, 10);
+	}, 100);
+}, 2000)
+
+</script>
+</head>
+<body>
+	<h1>BOM(Browser Object Model)</h1>
+	<h2>1. window 전역 객체(Global Object)</h2>
+	<ul>
+		<li>자바스크리트가 브라우저 창(window)을 제어하기 위한 객체</li>
+		<li>자바스크리트가 실행과 관련된 환경 정보에 접근이 가능한 객체</li>
+	</ul>
+</body>
+</html>

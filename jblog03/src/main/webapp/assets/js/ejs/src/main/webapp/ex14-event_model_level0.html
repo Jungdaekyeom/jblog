@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src='browser-detect.js' type="text/javascript"></script>
+<script>
+
+/*
+기본 이벤트 핸들러 동작 막기
+ - 1. anchor : 버튼이나 메뉴로 사용하는 경우 click event
+ - 2. form : validation(submit event)
+*/
+
+window.addEventListener("load", function(){
+	var form = document.getElementById("form-login");
+	
+	form.onsubmit = function() {
+		var inputEmail = document.getElementById("input-email");
+		if(inputEmail.value == '') {
+			alert('이메일이 Beer 있습니다.');
+			inputEmail.focus();
+			return false;
+		}
+
+		var inputPassword = document.getElementById("input-password");
+		if(inputPassword.value == '') {
+			alert('비밀번호가 Beer 있습니다.');
+			inputPassword.focus();
+			return false;
+		}
+
+		return true;
+	}
+});
+
+</script>
+</head>
+<body>
+	<h1>DOM(Document Object Model)</h1>
+	<h2>6. 기본(default) Event Handler 동작 막기 - 2. form: DOM Event Model Level0</h2>
+	
+	<form id='form-login' method='post' action='/user/auth'>
+		<input type='text' name='email' id='input-email' placeholder='이메일'/>
+		<br/><br/>
+
+		<input type='password' name='password' id='input-password' placeholder='패스워드'/>
+		<br/><br/>
+
+		<input type='submit' value='로그인'/>
+		<br/><br/>
+	</form>
+	
+	<a href="" id="btn-delete">삭제</a>
+	
+</body>
+</html>

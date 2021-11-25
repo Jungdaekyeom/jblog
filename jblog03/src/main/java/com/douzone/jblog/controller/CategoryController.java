@@ -37,7 +37,6 @@ public class CategoryController {
 	public String delete(@PathVariable("no") Long no, 
 			@PathVariable(value = "id", required = true) String id) {
 		
-		System.out.println("삭제할 번호:" + no + "삭제하는 아이디:" + id);
 		categoryService.delete(no);
 		return "redirect:/blog/" + id + "/admin/category";
 	}

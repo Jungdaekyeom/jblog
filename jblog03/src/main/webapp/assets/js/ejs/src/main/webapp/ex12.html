@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src='browser-detect.js' type="text/javascript"></script>
+<script>
+
+// element, eventName, eventHandler이 들어가는 함수를 만들자!
+var registerEventHandler = function(element, eventName, eventHandler){
+	element && 						// element가 null이 아니면
+	element.attachEvent && 			// 혹시 attachEvent 갖고 있어? 갖고 있다면 ie8
+	element.attachEvent('on' + eventName, eventHandler);
+	
+	element && 						// element가 null이 아니면
+	element.addEventListener && 	// 표준 브라우저라면
+	element.addEventListener(eventName, eventHandler);
+}
+
+window.addEventListener("load", function(){
+	
+	// 등록
+	var el = document.getElementById("header");
+	
+	var clickEventHandler1 = function(){
+		console.log("click1");
+	}
+	
+	var clickEventHandler2 = function(){
+		console.log("click2");
+	}	
+	
+	var clickEventHandler3 = function(){
+		console.log("click3");
+	}
+	
+	// 다중 리스너
+	// el, 클릭, 함수명
+	registerEventHandler(el, "click", clickEventHandler1);
+	registerEventHandler(el, "click", clickEventHandler2);
+	
+	// level0도 level2로 지원된다.
+	el.onclick = clickEventHandler3;
+	
+	// 제거
+	el.removeEventListener("click", clickEventHandler1);
+});
+
+</script>
+</head>
+<body>
+	<h1>DOM(Document Object Model)</h1>
+	<h2>5. Event 처리 </h2>
+	
+	<h3 id='header'>Click</h3>
+	
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src='browser-detect.js' type="text/javascript"></script>
+<script>
+
+/*
+
+기본 이벤트 핸들러 동작 막기
+ - 1. anchor : 버튼이나 메뉴로 사용하는 경우 click event
+ - 2. form : validation(submit event)
+ - 
+
+ */
+
+window.addEventListener("load", function(){
+	document
+	.getElementById("btn-delete") // btn-delete 아이디를 갖고옴
+	.addEventListener("click", function(event){
+		event.preventDefault(); // 기본 이벤트 무시. 없으면 log가 계속 삭제됨
+		console.log("비밀번호 입력 다이얼로그 띄우기");
+		
+		
+	});
+});
+
+</script>
+</head>
+<body>
+	<h1>DOM(Document Object Model)</h1>
+	<h2>6. 기본(default) Event Handler 동작 막기 - 2. form: DOM Event Model Level0</h2>
+	
+	<form id='form-login' method='post' action='/user/auth'>
+		<input type='text' name='email' id='input-email' placeholder='이메일'/>
+		<br/><br/>
+
+		<input type='password' name='password' id='input-password' placeholder='패스워드'/>
+		<br/><br/>
+
+		<input type='submit' value='로그인'/>
+		<br/><br/>
+	</form>
+	
+	<a href="" id="btn-delete">삭제</a>
+	
+</body>
+</html>

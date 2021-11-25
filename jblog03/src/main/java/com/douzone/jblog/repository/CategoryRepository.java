@@ -28,6 +28,6 @@ public class CategoryRepository {
 	}	
 	
 	public int delete(Long no) {
-		return sqlSession.selectOne("category.delete", no);
+		return sqlSession.delete("category.delete", no);
 	}
 }

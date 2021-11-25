@@ -1,5 +1,6 @@
 package com.douzone.jblog.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +97,7 @@ public class BlogController {
 			Model model) {
 		
 		BasicVo basicVo = new BasicVo();
-		List<CategoryVo> categoryVo = null;
+		List<CategoryVo> categoryVo = new ArrayList<>();
 		basicVo = basicService.find(id);
 		categoryVo = categoryService.findAll(id);
 		model.addAttribute("basic", basicVo);
