@@ -63,7 +63,6 @@ var addList = $("#add-form-ajax").submit(function(event){
 	vo.description = $("#description").val();
 	vo.blogId = $("#blogId").val();
 	
-	console.log(vo);
 		$.ajax({
 			url: path + '/category/api/insert',
 			async: true,
@@ -79,21 +78,46 @@ var addList = $("#add-form-ajax").submit(function(event){
 
 				// 이건 왜 안됐을까?
 	    		// var html = listAddTemplate.render(response, path);
-				var no = document.querySelector("tbody.admin-category-main").getElementsByTagName('tr').length;
-	    		var html = 		
-	    		"<tr value='" + vo.no + "'>" + 
-		    		"<td>" + (no+1) + "</td>" + 
-		    		"<td>" + vo.name + "</td>" + 
-		    		"<td>0</td>" + 
-		    		"<td>" + vo.description + "</td>" + 
-		    		"<td>" + 
-		    			"<a href='" + path + "/blog/" + vo.blogId + "/admin/category/delete/" + vo.no + "'>" + 
-		    				"<img src='" + path + "/assets/images/delete.jpg'>" + 
-		    			"</a>" + 
-		    		"</td>" + 
-		    	"</tr>"
-		    	
+		    	// 쿼리 셀렉트 한번 사용해봄 ㅋ
+            	var no = document.querySelector("tbody.admin-category-main").getElementsByTagName('tr').length;
+             	var html =       
+                "<tr value='" + vo.no + "'>" + 
+                   "<td>" + ( no + 1 ) + "</td>" + 
+                   "<td>" + vo.name + "</td>" + 
+                   "<td>" + "0" + "</td>" + 
+                   "<td>" + vo.description + "</td>" + 
+                   "<td>" + 
+                      "<a href='" + path + "/category/api/delete/" + vo.no + "' id='cate-delete'>" + 
+                         "<img src='" + path + "/assets/images/delete.jpg'>" + 
+                      "</a>" + 
+                   "</td>" + 
+                "</tr>"
+                
 				$(".admin-category-main").append(html);
+			},
+			
+			error: function(xhr, status, error) {
+				console.error(status + ":" + error);
+			}
+		});
+	});
+	
+var deleteList = $("#cate-delete").submit(function(event){
+	event.preventDefault();
+		
+		$.ajax({
+			url: path + '/category/api/delete',
+			async: true,
+			type: 'get',
+			dataType: 'json',
+			contentType: 'application/json',
+			success: function(response) {
+				if(response.result !== 'success') {
+					console.error(response.message);
+					return
+				}
+		    	
+				$(".admin-category-main").remove();
 			},
 			
 			error: function(xhr, status, error) {
