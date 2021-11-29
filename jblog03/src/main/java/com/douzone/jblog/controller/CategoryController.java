@@ -21,8 +21,7 @@ public class CategoryController {
 	public String insert(@RequestParam(value = "name", required = true) String name,
 			@RequestParam(value = "desc", required = true) String desc,
 			@RequestParam(value = "blogid", required = true) String blogid,
-			@PathVariable("id") String id,
-			Model model) {
+			@PathVariable("id") String id) {
 
 		CategoryVo categoryVo = new CategoryVo();
 		categoryVo.setName(name);

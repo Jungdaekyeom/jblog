@@ -8,7 +8,8 @@
 		from category a left join post b on a.no = b.category_no
 		where blog_id=#{id}
 		group by name
-		order by FIELD(name, '미분류'), name desc;
+		order by a.no asc
+
 		]]>
 	</select>
 	

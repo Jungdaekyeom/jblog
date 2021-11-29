@@ -14,22 +14,22 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 
+var path = "${pageContext.request.contextPath }"; 
+
 var listTemplate = new EJS({
-	url: "${pageContext.request.contextPath }/assets/js/ejs/list-template.ejs"
+	url: path + "/assets/js/ejs/list-template.ejs"
 });
 
-var listItemTemplate = new EJS({
-	url: "${pageContext.request.contextPath }/assets/js/ejs/listitem-template.ejs"
+var listAddTemplate = new EJS({
+	url: path + "/assets/js/ejs/listadd-template.ejs"
 });
-
-// var path = "${pageContext.request.contextPath }"; 
 
 $(function(){
 	// 카테고리 리스트 
-	var fetchList = function(){
+var fetchList = function(){
 		
 		$.ajax({
-			url: '${pageContext.request.contextPath }/category/api/list?id=${authUser.id }',
+			url: path + '/category/api/list?id=${authUser.id }',
 			async: true,
 			type: 'get',
 			dataType: 'json',
@@ -39,23 +39,75 @@ $(function(){
 					console.error(response.message);
 					return;
 				}
+				
 				// json 타입으로 path를 넘겨줌
 				// var html = listTemplate.render(response, path);
-				var html = listTemplate.render(response, {path : "${pageContext.request.contextPath }"});
-				$(".admin-cat-main").append(html);
+				
+				var html = listTemplate.render(response, path);
+				$(".admin-category-main").append(html);
 			},
+			
 			error: function(xhr, status, e){
 				console.error(status + ":" + e);
 			}
+			
 		});
 		
 	}
 	
-	fetchList();	
+var addList = $("#add-form-ajax").submit(function(event){
+	event.preventDefault();
+
+	var vo = {};
+	vo.name = $("#cate-name").val();
+	vo.description = $("#description").val();
+	vo.blogId = $("#blogId").val();
+	
+	console.log(vo);
+		$.ajax({
+			url: path + '/category/api/insert',
+			async: true,
+			type: 'post',
+			dataType: 'json',
+			contentType: 'application/json',
+			data: JSON.stringify(vo),
+			success: function(response) {
+				if(response.result !== 'success') {
+					console.error(response.message);
+					return
+				}
+
+				// 이건 왜 안됐을까?
+	    		// var html = listAddTemplate.render(response, path);
+				var no = document.querySelector("tbody.admin-category-main").getElementsByTagName('tr').length;
+	    		var html = 		
+	    		"<tr value='" + vo.no + "'>" + 
+		    		"<td>" + (no+1) + "</td>" + 
+		    		"<td>" + vo.name + "</td>" + 
+		    		"<td>0</td>" + 
+		    		"<td>" + vo.description + "</td>" + 
+		    		"<td>" + 
+		    			"<a href='" + path + "/blog/" + vo.blogId + "/admin/category/delete/" + vo.no + "'>" + 
+		    				"<img src='" + path + "/assets/images/delete.jpg'>" + 
+		    			"</a>" + 
+		    		"</td>" + 
+		    	"</tr>"
+		    	
+				$(".admin-category-main").append(html);
+			},
+			
+			error: function(xhr, status, error) {
+				console.error(status + ":" + error);
+			}
+		});
+	});
+
+	fetchList();
 });
 
 </script>
 </head>
+
 <body>
 	<div id="container">
 		<c:import url="/WEB-INF/views/includes/blog-header.jsp" />
@@ -76,7 +128,7 @@ $(function(){
 		      			<th>삭제</th>      			
 		      		</tr>
 		      		
-					<tbody class="admin-cat-main"></tbody> 
+					<tbody class="admin-category-main"></tbody> 
 				</table>
 
 				<br/>
@@ -113,20 +165,41 @@ $(function(){
 		      		</c:forEach>
 				</table>
 				
+				<form id="add-form-ajax" action="" method="post">
+	      			<h4 class="n-c">새로운 카테고리 추가</h4>
+	      			<input type="hidden" name="blogId" id="blogId" value="${authUser.id }" />
+			      	<table id="admin-category-add">
+			      		<tr>
+			      			<td class="category-name">카테고리명</td>
+			      			<td><input type="text" id="cate-name" name="name"></td>
+			      		</tr>
+			      		<tr>
+			      			<td class="category-explanation">설명</td>
+			      			<td><input type="text" id=description name="desc"></td>
+			      		</tr>
+			      		<tr>
+			      			<td>&nbsp;</td>
+			      			<td><input type="submit" value="카테고리 추가"></td>
+			      		</tr>      		      		
+			      	</table>
+		      	</form> 
+				
+				<p>==================================위에는 ajax 추가, 아래는 jstl 추가============================</p>
+				
       			<form id="add-form" action="${pageContext.request.contextPath}/blog/${authUser.id }/admin/category/insert" method="post">
 	      			<h4 class="n-c">새로운 카테고리 추가</h4>
 	      			<input type="hidden" name="blogid" value="${authUser.id }" />
-			      	<table id="admin-cat-add">
+			      	<table id="admin-category-add">
 			      		<tr>
-			      			<td class="t">카테고리명</td>
+			      			<td class="category-name">카테고리명</td>
 			      			<td><input type="text" name="name"></td>
 			      		</tr>
 			      		<tr>
-			      			<td class="t">설명</td>
+			      			<td class="category-explanation">설명</td>
 			      			<td><input type="text" name="desc"></td>
 			      		</tr>
 			      		<tr>
-			      			<td class="s">&nbsp;</td>
+			      			<td>&nbsp;</td>
 			      			<td><input type="submit" value="카테고리 추가"></td>
 			      		</tr>      		      		
 			      	</table>

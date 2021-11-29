@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,15 +28,18 @@ public class CategoryController {
 		List<CategoryVo> categoryVo = null;
 		categoryVo = categoryService.findAll(id);
 		return JsonResult.success(categoryVo);
+	}	
+	
+	@ResponseBody
+	@RequestMapping("/insert")
+	public JsonResult insert(@RequestBody CategoryVo vo) {
+		System.out.println(vo);
+		CategoryVo categoryVo = new CategoryVo();
+		categoryVo = categoryService.insert(vo);
+		
+		return JsonResult.success(categoryVo);
 	}
 	
-//	@ResponseBody
-//	@RequestMapping("/delete/{no}")
-//	public String delete(@PathVariable("no") Long no) {
-//		
-//		categoryService.delete(no);
-//	
-//		return JsonResult.success();
-//	}
+
 	
 }
